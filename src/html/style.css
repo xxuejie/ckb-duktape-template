@@ -1,0 +1,72 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+* {
+  outline: none;
+}
+
+textarea {
+  width: 100%
+}
+
+dialog {
+  width: 300px;
+  border: 1px solid #ccc;
+}
+
+dialog div,
+dialog pre {
+  overflow: auto;
+}
+
+dialog pre.serialize {
+  white-space: normal;
+  word-wrap: wrap;
+  word-break: break-all;
+}
+
+dialog button {
+  display: block;
+  margin-left: auto;
+}
+
+.molecules li {
+  display: flex;
+  padding: 15px;
+}
+
+.molecules li:focus-within {
+  background: #eee;
+}
+
+.molecules li label {
+  flex-basis: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.molecules li label::after {
+  display: inline;
+  content: ':';
+  padding-right: 15px;
+}
+
+.molecules li input {
+  flex: 1
+}
+
+.molecules button {
+  margin-left: 15px;
+}

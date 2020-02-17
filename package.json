@@ -1,0 +1,24 @@
+{
+  "name": "molecule-javascript-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "normalize": "moleculec-js --normalize-schema ./schema/types.json > ./generated/types.json",
+    "normalize:blockchain": "moleculec --language - --format json --schema-file ./schema/blockchain.mol > ./schema/blockchain.json && mkdir -p generated && npx moleculec-js -ns ./schema/blockchain.json > ./generated/blockchain.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keith-CY/molecule-javascript-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keith-CY/molecule-javascript-template/issues"
+  },
+  "homepage": "https://github.com/Keith-CY/molecule-javascript-template#readme",
+  "dependencies": {
+    "molecule-javascript": "0.1.1"
+  }
+}
