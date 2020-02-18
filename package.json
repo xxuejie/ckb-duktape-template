@@ -13,12 +13,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Keith-CY/molecule-javascript-template/issues"
   },
   "homepage": "https://github.com/Keith-CY/molecule-javascript-template#readme",
   "dependencies": {
-    "molecule-javascript": "0.1.1"
+    "molecule-javascript": "0.1.2"
   }
 }
