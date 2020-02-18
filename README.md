@@ -57,3 +57,54 @@ console.log(molecules)
 
 The folder `src/html` is a demo for browser.
 ![demo](./demo.png)
+
+## Use in Duktape
+
+The file `src/duktape/index.js` is a demo for Duktape.
+
+```js
+const { Molecule } = require('molecule-javascript')
+const schema = require('../../generated/blockchain.json')
+
+const scriptTypeIndex = schema.declarations.map(declaration => declaration.name).indexOf('Script')
+
+if (scriptTypeIndex < 0) {
+  throw new Error('Type Script is not defined')
+}
+
+const scriptType = schema.declarations[scriptTypeIndex]
+
+const molecule = new Molecule(scriptType)
+const scriptData = [
+  [ 'code_hash', [ '0x68', '0xd5', '0x43', '0x8a', '0xc9', '0x52', '0xd2', '0xf5', '0x84', '0xab', '0xf8', '0x79', '0x52', '0x79', '0x46', '0xa5', '0x37', '0xe8', '0x2c', '0x7f', '0x3c', '0x1c', '0xbf', '0x6d', '0x8e', '0xbf', '0x97', '0x67', '0x43', '0x7d', '0x8e', '0x88', ], ],
+  ['hash_type', '0x01'],
+  [ 'args', [ '0x39', '0x54', '0xac', '0xec', '0xe6', '0x50', '0x96', '0xbf', '0xa8', '0x12', '0x58', '0x98', '0x3d', '0xdb', '0x83', '0x91', '0x5f', '0xc5', '0x6b', '0xd8', ], ],
+]
+const serialized = molecule.serialize(scriptData)
+console.log(serialized)
+const parsed = molecule.deserialize(serialized)
+console.log(parsed)
+```
+
+For running in duktape it should be pre-compiled into ES5 with the following command
+
+```sh
+$ npm run build
+```
+
+and a file named `duktape.js` will be generated in the `build` directory.
+
+If you have installed duktape, simply run
+
+```sh
+$ duk duktape.js
+```
+
+and the result will be printed as follows
+
+```sh
+$ duk duktape.js
+
+0x4900000010000000300000003100000068d5438ac952d2f584abf879527946a537e82c7f3c1cbf6d8ebf9767437d8e8801140000003954acece65096bfa81258983ddb83915fc56bd8
+[["code_hash",["0x68","0xd5","0x43","0x8a","0xc9","0x52","0xd2","0xf5","0x84","0xab","0xf8","0x79","0x52","0x79","0x46","0xa5","0x37","0xe8","0x2c","0x7f","0x3c","0x1c","0xbf","0x6d","0x8e","0xbf","0x97","0x67","0x43","0x7d","0x8e","0x88"]],["hash_type","0x01"],["args",["0x39","0x54","0xac","0xec","0xe6","0x50","0x96","0xbf","0xa8","0x12","0x58","0x98","0x3d","0xdb","0x83","0x91","0x5f","0xc5","0x6b","0xd8"]]]
+```

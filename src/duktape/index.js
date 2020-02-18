@@ -1,0 +1,21 @@
+const { Molecule } = require('molecule-javascript')
+const schema = require('../../generated/blockchain.json')
+
+const scriptTypeIndex = schema.declarations.map(declaration => declaration.name).indexOf('Script')
+
+if (scriptTypeIndex < 0) {
+  throw new Error('Type Script is not defined')
+}
+
+const scriptType = schema.declarations[scriptTypeIndex]
+
+const molecule = new Molecule(scriptType)
+const scriptData = [
+  [ 'code_hash', [ '0x68', '0xd5', '0x43', '0x8a', '0xc9', '0x52', '0xd2', '0xf5', '0x84', '0xab', '0xf8', '0x79', '0x52', '0x79', '0x46', '0xa5', '0x37', '0xe8', '0x2c', '0x7f', '0x3c', '0x1c', '0xbf', '0x6d', '0x8e', '0xbf', '0x97', '0x67', '0x43', '0x7d', '0x8e', '0x88', ], ],
+  ['hash_type', '0x01'],
+  [ 'args', [ '0x39', '0x54', '0xac', '0xec', '0xe6', '0x50', '0x96', '0xbf', '0xa8', '0x12', '0x58', '0x98', '0x3d', '0xdb', '0x83', '0x91', '0x5f', '0xc5', '0x6b', '0xd8', ], ],
+]
+const serialized = molecule.serialize(scriptData)
+console.log(serialized)
+const parsed = molecule.deserialize(serialized)
+console.log(parsed)
