@@ -1,9 +1,7 @@
 const { Molecule } = require('molecule-javascript')
-const schema = require('../generated/blockchain.json')
+const schema = require('../schema/blockchain-combined.json')
 
-const molecules = {}
-schema.declarations.forEach(declaration => {
-  molecules[declaration.name] = new Molecule(declaration)
-})
+const scriptType = schema.declarations.find(declaration => declaration.name === "Script")
 
-console.log(molecules)
+// Write your script logic here.
+CKB.debug(scriptType)

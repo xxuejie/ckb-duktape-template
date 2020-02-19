@@ -4,7 +4,7 @@ module.exports = {
   target: 'web',
   mode: 'production',
   entry: {
-    duktape: './src/duktape/index.js',
+    duktape: './src/index.js',
   },
   module: {
     rules: [{

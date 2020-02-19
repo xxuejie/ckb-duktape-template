@@ -1,0 +1,1960 @@
+{
+  "namespace": "blockchain",
+  "declarations": [
+    {
+      "type": "array",
+      "name": "Uint32",
+      "itemCount": 4,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "array",
+      "name": "Uint64",
+      "itemCount": 8,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "array",
+      "name": "Uint128",
+      "itemCount": 16,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "array",
+      "name": "Byte32",
+      "itemCount": 32,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "array",
+      "name": "Uint256",
+      "itemCount": 32,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "fixvec",
+      "name": "Bytes",
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "option",
+      "name": "BytesOpt",
+      "item": {
+        "type": "fixvec",
+        "item": {
+          "type": "byte"
+        }
+      }
+    },
+    {
+      "type": "dynvec",
+      "name": "BytesVec",
+      "item": {
+        "type": "fixvec",
+        "item": {
+          "type": "byte"
+        }
+      }
+    },
+    {
+      "type": "fixvec",
+      "name": "Byte32Vec",
+      "item": {
+        "type": "array",
+        "itemCount": 32,
+        "item": {
+          "type": "byte"
+        }
+      }
+    },
+    {
+      "type": "table",
+      "name": "Script",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "code_hash"
+        },
+        {
+          "name": "hash_type",
+          "type": "byte"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "byte"
+          },
+          "name": "args"
+        }
+      ]
+    },
+    {
+      "type": "option",
+      "name": "ScriptOpt",
+      "item": {
+        "type": "table",
+        "fields": [
+          {
+            "type": "array",
+            "itemCount": 32,
+            "item": {
+              "type": "byte"
+            },
+            "name": "code_hash"
+          },
+          {
+            "name": "hash_type",
+            "type": "byte"
+          },
+          {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            },
+            "name": "args"
+          }
+        ]
+      }
+    },
+    {
+      "type": "array",
+      "name": "ProposalShortId",
+      "itemCount": 10,
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "struct",
+      "name": "OutPoint",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "tx_hash"
+        },
+        {
+          "type": "array",
+          "itemCount": 4,
+          "item": {
+            "type": "byte"
+          },
+          "name": "index"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "CellInput",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 8,
+          "item": {
+            "type": "byte"
+          },
+          "name": "since"
+        },
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "tx_hash"
+            },
+            {
+              "type": "array",
+              "itemCount": 4,
+              "item": {
+                "type": "byte"
+              },
+              "name": "index"
+            }
+          ],
+          "name": "previous_output"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "CellOutput",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 8,
+          "item": {
+            "type": "byte"
+          },
+          "name": "capacity"
+        },
+        {
+          "type": "table",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "code_hash"
+            },
+            {
+              "name": "hash_type",
+              "type": "byte"
+            },
+            {
+              "type": "fixvec",
+              "item": {
+                "type": "byte"
+              },
+              "name": "args"
+            }
+          ],
+          "name": "lock"
+        },
+        {
+          "type": "option",
+          "item": {
+            "type": "table",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 32,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "code_hash"
+              },
+              {
+                "name": "hash_type",
+                "type": "byte"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "byte"
+                },
+                "name": "args"
+              }
+            ]
+          },
+          "name": "type_"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "RawHeader",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 4,
+          "item": {
+            "type": "byte"
+          },
+          "name": "version"
+        },
+        {
+          "type": "array",
+          "itemCount": 4,
+          "item": {
+            "type": "byte"
+          },
+          "name": "compact_target"
+        },
+        {
+          "type": "array",
+          "itemCount": 8,
+          "item": {
+            "type": "byte"
+          },
+          "name": "timestamp"
+        },
+        {
+          "type": "array",
+          "itemCount": 8,
+          "item": {
+            "type": "byte"
+          },
+          "name": "number"
+        },
+        {
+          "type": "array",
+          "itemCount": 8,
+          "item": {
+            "type": "byte"
+          },
+          "name": "epoch"
+        },
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "parent_hash"
+        },
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "transactions_root"
+        },
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "proposals_hash"
+        },
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "uncles_hash"
+        },
+        {
+          "type": "array",
+          "itemCount": 32,
+          "item": {
+            "type": "byte"
+          },
+          "name": "dao"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "Header",
+      "fields": [
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 4,
+              "item": {
+                "type": "byte"
+              },
+              "name": "version"
+            },
+            {
+              "type": "array",
+              "itemCount": 4,
+              "item": {
+                "type": "byte"
+              },
+              "name": "compact_target"
+            },
+            {
+              "type": "array",
+              "itemCount": 8,
+              "item": {
+                "type": "byte"
+              },
+              "name": "timestamp"
+            },
+            {
+              "type": "array",
+              "itemCount": 8,
+              "item": {
+                "type": "byte"
+              },
+              "name": "number"
+            },
+            {
+              "type": "array",
+              "itemCount": 8,
+              "item": {
+                "type": "byte"
+              },
+              "name": "epoch"
+            },
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "parent_hash"
+            },
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "transactions_root"
+            },
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "proposals_hash"
+            },
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "uncles_hash"
+            },
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "dao"
+            }
+          ],
+          "name": "raw"
+        },
+        {
+          "type": "array",
+          "itemCount": 16,
+          "item": {
+            "type": "byte"
+          },
+          "name": "nonce"
+        }
+      ]
+    },
+    {
+      "type": "fixvec",
+      "name": "ProposalShortIdVec",
+      "item": {
+        "type": "array",
+        "itemCount": 10,
+        "item": {
+          "type": "byte"
+        }
+      }
+    },
+    {
+      "type": "table",
+      "name": "UncleBlock",
+      "fields": [
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "struct",
+              "fields": [
+                {
+                  "type": "array",
+                  "itemCount": 4,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "version"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 4,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "compact_target"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "timestamp"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "number"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "epoch"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "parent_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "transactions_root"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "proposals_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "uncles_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "dao"
+                }
+              ],
+              "name": "raw"
+            },
+            {
+              "type": "array",
+              "itemCount": 16,
+              "item": {
+                "type": "byte"
+              },
+              "name": "nonce"
+            }
+          ],
+          "name": "header"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "array",
+            "itemCount": 10,
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "proposals"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "CellDep",
+      "fields": [
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "tx_hash"
+            },
+            {
+              "type": "array",
+              "itemCount": 4,
+              "item": {
+                "type": "byte"
+              },
+              "name": "index"
+            }
+          ],
+          "name": "out_point"
+        },
+        {
+          "name": "dep_type",
+          "type": "byte"
+        }
+      ]
+    },
+    {
+      "type": "fixvec",
+      "name": "CellDepVec",
+      "item": {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 32,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "tx_hash"
+              },
+              {
+                "type": "array",
+                "itemCount": 4,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "index"
+              }
+            ],
+            "name": "out_point"
+          },
+          {
+            "name": "dep_type",
+            "type": "byte"
+          }
+        ]
+      }
+    },
+    {
+      "type": "fixvec",
+      "name": "CellInputVec",
+      "item": {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "array",
+            "itemCount": 8,
+            "item": {
+              "type": "byte"
+            },
+            "name": "since"
+          },
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 32,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "tx_hash"
+              },
+              {
+                "type": "array",
+                "itemCount": 4,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "index"
+              }
+            ],
+            "name": "previous_output"
+          }
+        ]
+      }
+    },
+    {
+      "type": "dynvec",
+      "name": "CellOutputVec",
+      "item": {
+        "type": "table",
+        "fields": [
+          {
+            "type": "array",
+            "itemCount": 8,
+            "item": {
+              "type": "byte"
+            },
+            "name": "capacity"
+          },
+          {
+            "type": "table",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 32,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "code_hash"
+              },
+              {
+                "name": "hash_type",
+                "type": "byte"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "byte"
+                },
+                "name": "args"
+              }
+            ],
+            "name": "lock"
+          },
+          {
+            "type": "option",
+            "item": {
+              "type": "table",
+              "fields": [
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "code_hash"
+                },
+                {
+                  "name": "hash_type",
+                  "type": "byte"
+                },
+                {
+                  "type": "fixvec",
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "args"
+                }
+              ]
+            },
+            "name": "type_"
+          }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "name": "RawTransaction",
+      "fields": [
+        {
+          "type": "array",
+          "itemCount": 4,
+          "item": {
+            "type": "byte"
+          },
+          "name": "version"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "tx_hash"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 4,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "index"
+                  }
+                ],
+                "name": "out_point"
+              },
+              {
+                "name": "dep_type",
+                "type": "byte"
+              }
+            ]
+          },
+          "name": "cell_deps"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "array",
+            "itemCount": 32,
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "header_deps"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 8,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "since"
+              },
+              {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "tx_hash"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 4,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "index"
+                  }
+                ],
+                "name": "previous_output"
+              }
+            ]
+          },
+          "name": "inputs"
+        },
+        {
+          "type": "dynvec",
+          "item": {
+            "type": "table",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 8,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "capacity"
+              },
+              {
+                "type": "table",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "code_hash"
+                  },
+                  {
+                    "name": "hash_type",
+                    "type": "byte"
+                  },
+                  {
+                    "type": "fixvec",
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "args"
+                  }
+                ],
+                "name": "lock"
+              },
+              {
+                "type": "option",
+                "item": {
+                  "type": "table",
+                  "fields": [
+                    {
+                      "type": "array",
+                      "itemCount": 32,
+                      "item": {
+                        "type": "byte"
+                      },
+                      "name": "code_hash"
+                    },
+                    {
+                      "name": "hash_type",
+                      "type": "byte"
+                    },
+                    {
+                      "type": "fixvec",
+                      "item": {
+                        "type": "byte"
+                      },
+                      "name": "args"
+                    }
+                  ]
+                },
+                "name": "type_"
+              }
+            ]
+          },
+          "name": "outputs"
+        },
+        {
+          "type": "dynvec",
+          "item": {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "outputs_data"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "Transaction",
+      "fields": [
+        {
+          "type": "table",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 4,
+              "item": {
+                "type": "byte"
+              },
+              "name": "version"
+            },
+            {
+              "type": "fixvec",
+              "item": {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "struct",
+                    "fields": [
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "tx_hash"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 4,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "index"
+                      }
+                    ],
+                    "name": "out_point"
+                  },
+                  {
+                    "name": "dep_type",
+                    "type": "byte"
+                  }
+                ]
+              },
+              "name": "cell_deps"
+            },
+            {
+              "type": "fixvec",
+              "item": {
+                "type": "array",
+                "itemCount": 32,
+                "item": {
+                  "type": "byte"
+                }
+              },
+              "name": "header_deps"
+            },
+            {
+              "type": "fixvec",
+              "item": {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 8,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "since"
+                  },
+                  {
+                    "type": "struct",
+                    "fields": [
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "tx_hash"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 4,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "index"
+                      }
+                    ],
+                    "name": "previous_output"
+                  }
+                ]
+              },
+              "name": "inputs"
+            },
+            {
+              "type": "dynvec",
+              "item": {
+                "type": "table",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 8,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "capacity"
+                  },
+                  {
+                    "type": "table",
+                    "fields": [
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "code_hash"
+                      },
+                      {
+                        "name": "hash_type",
+                        "type": "byte"
+                      },
+                      {
+                        "type": "fixvec",
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "args"
+                      }
+                    ],
+                    "name": "lock"
+                  },
+                  {
+                    "type": "option",
+                    "item": {
+                      "type": "table",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 32,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "code_hash"
+                        },
+                        {
+                          "name": "hash_type",
+                          "type": "byte"
+                        },
+                        {
+                          "type": "fixvec",
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "args"
+                        }
+                      ]
+                    },
+                    "name": "type_"
+                  }
+                ]
+              },
+              "name": "outputs"
+            },
+            {
+              "type": "dynvec",
+              "item": {
+                "type": "fixvec",
+                "item": {
+                  "type": "byte"
+                }
+              },
+              "name": "outputs_data"
+            }
+          ],
+          "name": "raw"
+        },
+        {
+          "type": "dynvec",
+          "item": {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "witnesses"
+        }
+      ]
+    },
+    {
+      "type": "dynvec",
+      "name": "UncleBlockVec",
+      "item": {
+        "type": "table",
+        "fields": [
+          {
+            "type": "struct",
+            "fields": [
+              {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 4,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "version"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 4,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "compact_target"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 8,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "timestamp"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 8,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "number"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 8,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "epoch"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "parent_hash"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "transactions_root"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "proposals_hash"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "uncles_hash"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 32,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "dao"
+                  }
+                ],
+                "name": "raw"
+              },
+              {
+                "type": "array",
+                "itemCount": 16,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "nonce"
+              }
+            ],
+            "name": "header"
+          },
+          {
+            "type": "fixvec",
+            "item": {
+              "type": "array",
+              "itemCount": 10,
+              "item": {
+                "type": "byte"
+              }
+            },
+            "name": "proposals"
+          }
+        ]
+      }
+    },
+    {
+      "type": "dynvec",
+      "name": "TransactionVec",
+      "item": {
+        "type": "table",
+        "fields": [
+          {
+            "type": "table",
+            "fields": [
+              {
+                "type": "array",
+                "itemCount": 4,
+                "item": {
+                  "type": "byte"
+                },
+                "name": "version"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "struct",
+                  "fields": [
+                    {
+                      "type": "struct",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 32,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "tx_hash"
+                        },
+                        {
+                          "type": "array",
+                          "itemCount": 4,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "index"
+                        }
+                      ],
+                      "name": "out_point"
+                    },
+                    {
+                      "name": "dep_type",
+                      "type": "byte"
+                    }
+                  ]
+                },
+                "name": "cell_deps"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  }
+                },
+                "name": "header_deps"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "struct",
+                  "fields": [
+                    {
+                      "type": "array",
+                      "itemCount": 8,
+                      "item": {
+                        "type": "byte"
+                      },
+                      "name": "since"
+                    },
+                    {
+                      "type": "struct",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 32,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "tx_hash"
+                        },
+                        {
+                          "type": "array",
+                          "itemCount": 4,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "index"
+                        }
+                      ],
+                      "name": "previous_output"
+                    }
+                  ]
+                },
+                "name": "inputs"
+              },
+              {
+                "type": "dynvec",
+                "item": {
+                  "type": "table",
+                  "fields": [
+                    {
+                      "type": "array",
+                      "itemCount": 8,
+                      "item": {
+                        "type": "byte"
+                      },
+                      "name": "capacity"
+                    },
+                    {
+                      "type": "table",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 32,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "code_hash"
+                        },
+                        {
+                          "name": "hash_type",
+                          "type": "byte"
+                        },
+                        {
+                          "type": "fixvec",
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "args"
+                        }
+                      ],
+                      "name": "lock"
+                    },
+                    {
+                      "type": "option",
+                      "item": {
+                        "type": "table",
+                        "fields": [
+                          {
+                            "type": "array",
+                            "itemCount": 32,
+                            "item": {
+                              "type": "byte"
+                            },
+                            "name": "code_hash"
+                          },
+                          {
+                            "name": "hash_type",
+                            "type": "byte"
+                          },
+                          {
+                            "type": "fixvec",
+                            "item": {
+                              "type": "byte"
+                            },
+                            "name": "args"
+                          }
+                        ]
+                      },
+                      "name": "type_"
+                    }
+                  ]
+                },
+                "name": "outputs"
+              },
+              {
+                "type": "dynvec",
+                "item": {
+                  "type": "fixvec",
+                  "item": {
+                    "type": "byte"
+                  }
+                },
+                "name": "outputs_data"
+              }
+            ],
+            "name": "raw"
+          },
+          {
+            "type": "dynvec",
+            "item": {
+              "type": "fixvec",
+              "item": {
+                "type": "byte"
+              }
+            },
+            "name": "witnesses"
+          }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "name": "Block",
+      "fields": [
+        {
+          "type": "struct",
+          "fields": [
+            {
+              "type": "struct",
+              "fields": [
+                {
+                  "type": "array",
+                  "itemCount": 4,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "version"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 4,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "compact_target"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "timestamp"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "number"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 8,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "epoch"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "parent_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "transactions_root"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "proposals_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "uncles_hash"
+                },
+                {
+                  "type": "array",
+                  "itemCount": 32,
+                  "item": {
+                    "type": "byte"
+                  },
+                  "name": "dao"
+                }
+              ],
+              "name": "raw"
+            },
+            {
+              "type": "array",
+              "itemCount": 16,
+              "item": {
+                "type": "byte"
+              },
+              "name": "nonce"
+            }
+          ],
+          "name": "header"
+        },
+        {
+          "type": "dynvec",
+          "item": {
+            "type": "table",
+            "fields": [
+              {
+                "type": "struct",
+                "fields": [
+                  {
+                    "type": "struct",
+                    "fields": [
+                      {
+                        "type": "array",
+                        "itemCount": 4,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "version"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 4,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "compact_target"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 8,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "timestamp"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 8,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "number"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 8,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "epoch"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "parent_hash"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "transactions_root"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "proposals_hash"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "uncles_hash"
+                      },
+                      {
+                        "type": "array",
+                        "itemCount": 32,
+                        "item": {
+                          "type": "byte"
+                        },
+                        "name": "dao"
+                      }
+                    ],
+                    "name": "raw"
+                  },
+                  {
+                    "type": "array",
+                    "itemCount": 16,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "nonce"
+                  }
+                ],
+                "name": "header"
+              },
+              {
+                "type": "fixvec",
+                "item": {
+                  "type": "array",
+                  "itemCount": 10,
+                  "item": {
+                    "type": "byte"
+                  }
+                },
+                "name": "proposals"
+              }
+            ]
+          },
+          "name": "uncles"
+        },
+        {
+          "type": "dynvec",
+          "item": {
+            "type": "table",
+            "fields": [
+              {
+                "type": "table",
+                "fields": [
+                  {
+                    "type": "array",
+                    "itemCount": 4,
+                    "item": {
+                      "type": "byte"
+                    },
+                    "name": "version"
+                  },
+                  {
+                    "type": "fixvec",
+                    "item": {
+                      "type": "struct",
+                      "fields": [
+                        {
+                          "type": "struct",
+                          "fields": [
+                            {
+                              "type": "array",
+                              "itemCount": 32,
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "tx_hash"
+                            },
+                            {
+                              "type": "array",
+                              "itemCount": 4,
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "index"
+                            }
+                          ],
+                          "name": "out_point"
+                        },
+                        {
+                          "name": "dep_type",
+                          "type": "byte"
+                        }
+                      ]
+                    },
+                    "name": "cell_deps"
+                  },
+                  {
+                    "type": "fixvec",
+                    "item": {
+                      "type": "array",
+                      "itemCount": 32,
+                      "item": {
+                        "type": "byte"
+                      }
+                    },
+                    "name": "header_deps"
+                  },
+                  {
+                    "type": "fixvec",
+                    "item": {
+                      "type": "struct",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 8,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "since"
+                        },
+                        {
+                          "type": "struct",
+                          "fields": [
+                            {
+                              "type": "array",
+                              "itemCount": 32,
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "tx_hash"
+                            },
+                            {
+                              "type": "array",
+                              "itemCount": 4,
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "index"
+                            }
+                          ],
+                          "name": "previous_output"
+                        }
+                      ]
+                    },
+                    "name": "inputs"
+                  },
+                  {
+                    "type": "dynvec",
+                    "item": {
+                      "type": "table",
+                      "fields": [
+                        {
+                          "type": "array",
+                          "itemCount": 8,
+                          "item": {
+                            "type": "byte"
+                          },
+                          "name": "capacity"
+                        },
+                        {
+                          "type": "table",
+                          "fields": [
+                            {
+                              "type": "array",
+                              "itemCount": 32,
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "code_hash"
+                            },
+                            {
+                              "name": "hash_type",
+                              "type": "byte"
+                            },
+                            {
+                              "type": "fixvec",
+                              "item": {
+                                "type": "byte"
+                              },
+                              "name": "args"
+                            }
+                          ],
+                          "name": "lock"
+                        },
+                        {
+                          "type": "option",
+                          "item": {
+                            "type": "table",
+                            "fields": [
+                              {
+                                "type": "array",
+                                "itemCount": 32,
+                                "item": {
+                                  "type": "byte"
+                                },
+                                "name": "code_hash"
+                              },
+                              {
+                                "name": "hash_type",
+                                "type": "byte"
+                              },
+                              {
+                                "type": "fixvec",
+                                "item": {
+                                  "type": "byte"
+                                },
+                                "name": "args"
+                              }
+                            ]
+                          },
+                          "name": "type_"
+                        }
+                      ]
+                    },
+                    "name": "outputs"
+                  },
+                  {
+                    "type": "dynvec",
+                    "item": {
+                      "type": "fixvec",
+                      "item": {
+                        "type": "byte"
+                      }
+                    },
+                    "name": "outputs_data"
+                  }
+                ],
+                "name": "raw"
+              },
+              {
+                "type": "dynvec",
+                "item": {
+                  "type": "fixvec",
+                  "item": {
+                    "type": "byte"
+                  }
+                },
+                "name": "witnesses"
+              }
+            ]
+          },
+          "name": "transactions"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "array",
+            "itemCount": 10,
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "proposals"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "CellbaseWitness",
+      "fields": [
+        {
+          "type": "table",
+          "fields": [
+            {
+              "type": "array",
+              "itemCount": 32,
+              "item": {
+                "type": "byte"
+              },
+              "name": "code_hash"
+            },
+            {
+              "name": "hash_type",
+              "type": "byte"
+            },
+            {
+              "type": "fixvec",
+              "item": {
+                "type": "byte"
+              },
+              "name": "args"
+            }
+          ],
+          "name": "lock"
+        },
+        {
+          "type": "fixvec",
+          "item": {
+            "type": "byte"
+          },
+          "name": "message"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "WitnessArgs",
+      "fields": [
+        {
+          "type": "option",
+          "item": {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "lock"
+        },
+        {
+          "type": "option",
+          "item": {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "input_type"
+        },
+        {
+          "type": "option",
+          "item": {
+            "type": "fixvec",
+            "item": {
+              "type": "byte"
+            }
+          },
+          "name": "output_type"
+        }
+      ]
+    }
+  ]
+}
