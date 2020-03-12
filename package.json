@@ -1,31 +1,19 @@
 {
   "name": "ckb-duktape-template",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack",
-    "rebuild-schema": "moleculec --language - --format json --schema-file ./schema/blockchain.mol > ./schema/blockchain.json && npx moleculec-js -ns ./schema/blockchain.json > ./schema/blockchain-combined.json"
+    "build": "rollup -c",
+    "rebuild-schema": "moleculec --language - --format json --schema-file ./schema/blockchain.mol > ./schema/blockchain.json && moleculec-es -inputFile ./schema/blockchain.json -outputFile ./schema/blockchain.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Keith-CY/molecule-javascript-template.git"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "Xuejie Xiao",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Keith-CY/molecule-javascript-template/issues"
-  },
-  "homepage": "https://github.com/Keith-CY/molecule-javascript-template#readme",
-  "dependencies": {
-    "molecule-javascript": "0.1.5"
-  },
   "devDependencies": {
-    "@babel/core": "7.8.4",
-    "@babel/preset-env": "7.8.4",
-    "babel-loader": "8.0.6",
-    "webpack": "4.41.6",
-    "webpack-cli": "3.3.11"
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^5.2.0"
   }
 }
