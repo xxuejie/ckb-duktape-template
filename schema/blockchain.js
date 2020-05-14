@@ -78,6 +78,7 @@ function serializeTable(buffers) {
   }
   return buffer;
 }
+
 export class Uint32 {
   constructor(reader, { validate = true } = {}) {
     this.view = new DataView(assertArrayBuffer(reader));
@@ -106,13 +107,15 @@ export class Uint32 {
     return this.view.getUint32(0, true);
   }
 
-  size() {
+  static size() {
     return 4;
   }
 }
 
 export function SerializeUint32(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 4);
+  return buffer;
 }
 
 export class Uint64 {
@@ -143,13 +146,15 @@ export class Uint64 {
     return this.view.getUint64(0, true);
   }
 
-  size() {
+  static size() {
     return 8;
   }
 }
 
 export function SerializeUint64(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 8);
+  return buffer;
 }
 
 export class Uint128 {
@@ -172,13 +177,15 @@ export class Uint128 {
     return this.view.buffer;
   }
 
-  size() {
+  static size() {
     return 16;
   }
 }
 
 export function SerializeUint128(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 16);
+  return buffer;
 }
 
 export class Byte32 {
@@ -201,13 +208,15 @@ export class Byte32 {
     return this.view.buffer;
   }
 
-  size() {
+  static size() {
     return 32;
   }
 }
 
 export function SerializeByte32(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 32);
+  return buffer;
 }
 
 export class Uint256 {
@@ -230,13 +239,15 @@ export class Uint256 {
     return this.view.buffer;
   }
 
-  size() {
+  static size() {
     return 32;
   }
 }
 
 export function SerializeUint256(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 32);
+  return buffer;
 }
 
 export class Bytes {
@@ -269,10 +280,10 @@ export class Bytes {
 }
 
 export function SerializeBytes(value) {
-  const reader = new Reader(value);
-  const array = new Uint8Array(4 + reader.length());
-  (new DataView(array.buffer)).setUint32(0, reader.length(), true);
-  array.set(new Uint8Array(reader.toArrayBuffer()), 4);
+  const item = assertArrayBuffer(value);
+  const array = new Uint8Array(4 + item.byteLength);
+  (new DataView(array.buffer)).setUint32(0, item.byteLength, true);
+  array.set(new Uint8Array(item), 4);
   return array.buffer;
 }
 
@@ -484,13 +495,15 @@ export class ProposalShortId {
     return this.view.buffer;
   }
 
-  size() {
+  static size() {
     return 10;
   }
 }
 
 export function SerializeProposalShortId(value) {
-  return new Reader(value).toArrayBuffer();
+  const buffer = assertArrayBuffer(value);
+  assertDataLength(buffer.byteLength, 10);
+  return buffer;
 }
 
 export class OutPoint {
@@ -502,18 +515,20 @@ export class OutPoint {
   }
 
   getTxHash() {
-    return new Byte32(this.view.buffer.slice(0, Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0, 0 + Byte32.size()), { validate: false });
   }
 
   getIndex() {
-    return new Uint32(this.view.buffer.slice(0 + Byte32.size(), Uint32.size()), { validate: false });
+    return new Uint32(this.view.buffer.slice(0 + Byte32.size(), 0 + Byte32.size() + Uint32.size()), { validate: false });
   }
 
   validate(compatible = false) {
-    const requiredByteLength = 0 + Byte32.size() + Uint32.size();
-    assertDataLength(this.view.byteLength, requiredByteLength);
+    assertDataLength(this.view.byteLength, OutPoint.size());
     this.getTxHash().validate(compatible);
     this.getIndex().validate(compatible);
+  }
+  static size() {
+    return 0 + Byte32.size() + Uint32.size();
   }
 }
 
@@ -534,18 +549,20 @@ export class CellInput {
   }
 
   getSince() {
-    return new Uint64(this.view.buffer.slice(0, Uint64.size()), { validate: false });
+    return new Uint64(this.view.buffer.slice(0, 0 + Uint64.size()), { validate: false });
   }
 
   getPreviousOutput() {
-    return new OutPoint(this.view.buffer.slice(0 + Uint64.size(), OutPoint.size()), { validate: false });
+    return new OutPoint(this.view.buffer.slice(0 + Uint64.size(), 0 + Uint64.size() + OutPoint.size()), { validate: false });
   }
 
   validate(compatible = false) {
-    const requiredByteLength = 0 + Uint64.size() + OutPoint.size();
-    assertDataLength(this.view.byteLength, requiredByteLength);
+    assertDataLength(this.view.byteLength, CellInput.size());
     this.getSince().validate(compatible);
     this.getPreviousOutput().validate(compatible);
+  }
+  static size() {
+    return 0 + Uint64.size() + OutPoint.size();
   }
 }
 
@@ -611,48 +628,47 @@ export class RawHeader {
   }
 
   getVersion() {
-    return new Uint32(this.view.buffer.slice(0, Uint32.size()), { validate: false });
+    return new Uint32(this.view.buffer.slice(0, 0 + Uint32.size()), { validate: false });
   }
 
   getCompactTarget() {
-    return new Uint32(this.view.buffer.slice(0 + Uint32.size(), Uint32.size()), { validate: false });
+    return new Uint32(this.view.buffer.slice(0 + Uint32.size(), 0 + Uint32.size() + Uint32.size()), { validate: false });
   }
 
   getTimestamp() {
-    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size(), Uint64.size()), { validate: false });
+    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size()), { validate: false });
   }
 
   getNumber() {
-    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size(), Uint64.size()), { validate: false });
+    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size()), { validate: false });
   }
 
   getEpoch() {
-    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size(), Uint64.size()), { validate: false });
+    return new Uint64(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size()), { validate: false });
   }
 
   getParentHash() {
-    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size(), Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size()), { validate: false });
   }
 
   getTransactionsRoot() {
-    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size(), Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size()), { validate: false });
   }
 
   getProposalsHash() {
-    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size(), Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size()), { validate: false });
   }
 
   getUnclesHash() {
-    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size(), Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size()), { validate: false });
   }
 
   getDao() {
-    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size(), Byte32.size()), { validate: false });
+    return new Byte32(this.view.buffer.slice(0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size(), 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size()), { validate: false });
   }
 
   validate(compatible = false) {
-    const requiredByteLength = 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size();
-    assertDataLength(this.view.byteLength, requiredByteLength);
+    assertDataLength(this.view.byteLength, RawHeader.size());
     this.getVersion().validate(compatible);
     this.getCompactTarget().validate(compatible);
     this.getTimestamp().validate(compatible);
@@ -663,6 +679,9 @@ export class RawHeader {
     this.getProposalsHash().validate(compatible);
     this.getUnclesHash().validate(compatible);
     this.getDao().validate(compatible);
+  }
+  static size() {
+    return 0 + Uint32.size() + Uint32.size() + Uint64.size() + Uint64.size() + Uint64.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size() + Byte32.size();
   }
 }
 
@@ -691,18 +710,20 @@ export class Header {
   }
 
   getRaw() {
-    return new RawHeader(this.view.buffer.slice(0, RawHeader.size()), { validate: false });
+    return new RawHeader(this.view.buffer.slice(0, 0 + RawHeader.size()), { validate: false });
   }
 
   getNonce() {
-    return new Uint128(this.view.buffer.slice(0 + RawHeader.size(), Uint128.size()), { validate: false });
+    return new Uint128(this.view.buffer.slice(0 + RawHeader.size(), 0 + RawHeader.size() + Uint128.size()), { validate: false });
   }
 
   validate(compatible = false) {
-    const requiredByteLength = 0 + RawHeader.size() + Uint128.size();
-    assertDataLength(this.view.byteLength, requiredByteLength);
+    assertDataLength(this.view.byteLength, Header.size());
     this.getRaw().validate(compatible);
     this.getNonce().validate(compatible);
+  }
+  static size() {
+    return 0 + RawHeader.size() + Uint128.size();
   }
 }
 
@@ -798,7 +819,7 @@ export class CellDep {
   }
 
   getOutPoint() {
-    return new OutPoint(this.view.buffer.slice(0, OutPoint.size()), { validate: false });
+    return new OutPoint(this.view.buffer.slice(0, 0 + OutPoint.size()), { validate: false });
   }
 
   getDepType() {
@@ -806,9 +827,11 @@ export class CellDep {
   }
 
   validate(compatible = false) {
-    const requiredByteLength = 0 + OutPoint.size() + 1;
-    assertDataLength(this.view.byteLength, requiredByteLength);
+    assertDataLength(this.view.byteLength, CellDep.size());
     this.getOutPoint().validate(compatible);
+  }
+  static size() {
+    return 0 + OutPoint.size() + 1;
   }
 }
 
